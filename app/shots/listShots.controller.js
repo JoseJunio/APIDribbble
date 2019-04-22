@@ -5,7 +5,8 @@ angular
         
         self.url = "https://api.dribbble.com/v2/user/shots"
         //self.accessToken = "156c9e530485d6a67a42275d749b0f09b5c1e3c13d1c7d05c19d2052bf6a7f68";
-        self.accessToken = '93e550681e5a64b65c2e8a685981342919e354bf990da632302026db9feea8f6';
+        //self.accessToken = '93e550681e5a64b65c2e8a685981342919e354bf990da632302026db9feea8f6';
+        self.accessToken = '1530dc6d0512f9048e259dece21684aa9881b766213fdf62598b0cbabf66f7e9';
         self.shots = [];
 
         self.init = listShots;
