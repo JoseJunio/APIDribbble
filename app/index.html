@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="dribbbleApp">
+ <head>
+  <link rel="stylesheet" href="app.css">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+  <script src="shots/shots.module.js"></script>
+  <script src="shots/searchShot.controller.js"></script>
+  <script src="shots/listShots.controller.js"></script>
+  <script src="app.module.js"></script>
+  <script src="app.controller.js"></script>
+ </head>
+ <body ng-controller="ListShotsController as listShot" ng-init="listShot.init()">
+ <!--<body>-->
+   <header>
+        <span>Consuming service Dribbble.com<span>
+    </header>
+    <div class="searchShots">
+        <div class="infoShots"r>
+            <span> Web Application to search shots in API Dribbble</span>
+        </div>
+        <div ng-controller="SearchShotController as searchShot" class="container containerMargin">
+            <div class="d-flex justify-content-center h-100">
+                <div class="searchbar">
+                    <input class="search_input" type="text" name="" ng-model="searchShot.searchInput" placeholder="Search...">
+                    <a href="#" ng-click="searchShot.search()" class="search_icon"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="shots"></div>
+    <div  class="navShots">
+        <select id="listLength" ng-model="listShot.selectedLength" ng-change="listShot.listShots()" ng-options="x for x in listShot.listOptions"></select>
+        <div class="iconsNavShots">
+            <a href="#" id="previous" ng-click="listShot.previous()" class="previous round margin"><i class="fas fa-angle-left"></i></a>
+            <a href="#" id="next" ng-click="listShot.next()" class="next round margin"><i class="fas fa-angle-right"></i></a>
+            <i id="like" ng-class="(listShot.likes[listShot.position] == 1) ? 'fas fa-heart' : 'far fa-heart'" ng-click="listShot.like()"></i>
+        </div>
+    </div>
+ </body>
+</html>
