@@ -1,4 +1,2 @@
-/*var searchShot = angular.module('searchShot', []);
-var listShots = angular.module('listShots', []);*/
 angular
-    .module('shots', ['searchShot', 'listShots']);
+    .module('app.shots', ['app.shots.listShots', 'app.shots.searchShot', 'app.shots.searchShot.filter']);

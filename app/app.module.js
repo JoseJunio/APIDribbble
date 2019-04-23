@@ -1,2 +1,2 @@
 angular
-    .module('dribbbleApp', ['shots']);
+    .module('dribbbleApp', ['app.shots']);

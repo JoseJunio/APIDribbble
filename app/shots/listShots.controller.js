@@ -1,36 +1,40 @@
 angular
-    .module('listShots', [])
+    .module('app.shots.listShots', [])
     .controller('ListShotsController',['$scope', '$http', function($scope, $http){
         var self = this;
         
+        $scope.shots = [];
+        $scope.listShots = listShots;
+        $scope.position = 0;
+        $scope.createImg = createImg;
+
         self.url = "https://api.dribbble.com/v2/user/shots"
         //self.accessToken = "156c9e530485d6a67a42275d749b0f09b5c1e3c13d1c7d05c19d2052bf6a7f68";
         //self.accessToken = '93e550681e5a64b65c2e8a685981342919e354bf990da632302026db9feea8f6';
         self.accessToken = '1530dc6d0512f9048e259dece21684aa9881b766213fdf62598b0cbabf66f7e9';
-        self.shots = [];
 
         self.init = listShots;
-        self.listShots = listShots;
         self.next = next;
         self.previous = previous;
-        self.classLike = 'far fa-heart';
         
-        self.listOptions = ['Small', 'Normal', 'Large'];
-        self.position = 0;
-        self.selectedLength = self.listOptions[1];
-
+        
         self.likes = [];
         self.like = like;
-
+        self.listOptions = ['Small', 'Normal', 'Large'];
+        self.selectedLength = self.listOptions[1];
+        self.classLike = 'far fa-heart';
+        
         function listShots(){
             $http({
                 method: "GET",
                 url: self.url + "?access_token=" + self.accessToken,
             })
             .then(function(response){
-                    self.shots = response.data;
+                    $scope.shots = response.data;
+                    $scope.originShots = response.data;
+                    console.log($scope.shots);
                     if(self.likes.length == 0){
-                        self.likes[self.shots.length];
+                        self.likes[$scope.shots.length];
                     }  
                     createImg(0);
                 }
@@ -38,26 +42,22 @@ angular
         }
 
         function next(){
-            if(self.position >= 0 && self.position < (self.shots.length-1)){
-                self.position++;
-                createImg(self.position);
-            } else{
-                console.log('acabou')
+            if($scope.position >= 0 && $scope.position < ($scope.shots.length-1)){
+                $scope.position++;
+                createImg($scope.position);
             }
         }
     
         function previous(){
-            if(self.position > 0 && self.position <= (self.shots.length-1)){
-                self.position--;
-                createImg(self.position);
-            } else{
-                console.log('acabou')
-            }
+            if($scope.position > 0 && $scope.position <= ($scope.shots.length-1)){
+                $scope.position--;
+                createImg($scope.position);
+            } 
         }
 
-        function createImg(index){
+        function createImg(index, img){
             var shot = angular.element(document.querySelector('#shots'));
-            var val = self.shots[index];
+            var val = img ? img : $scope.shots[index];
 
             var imgDiv = angular.element(document.querySelector('.shot'));
 
@@ -86,22 +86,12 @@ angular
         }
 
         function like(){
-            if (self.likes[self.position] == 1) {
-                self.likes[self.position] = 0;
+            if (self.likes[$scope.position] == 1) {
+                self.likes[$scope.position] = 0;
                 self.classLike = "far fa-heart";
             } else {
-                self.likes[self.position] = 1;
+                self.likes[$scope.position] = 1;
                 self.classLike = "fas fa-heart";
-            }
-        }
-
-        function doLike() {
-            if (self.userVotes == 1) {
-                delete self.userVotes;
-                self.votes--;
-            } else {
-                self.userVotes = 1;
-                self.votes++;
             }
         }
 
