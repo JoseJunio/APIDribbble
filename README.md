@@ -18,3 +18,9 @@ Depois execute:
 ```
 npm start
 ```
+
+## Funcionalidades
+A aplicação consome os serviços da API Dribbble
+
+1. Lista os shots de acordo com o token autenticado
+1. Busca os shots.
